@@ -1,4 +1,4 @@
-const darkModeBtn = document.getElementById('darkModeBtn');
+// const darkModeBtn = document.getElementById('darkModeBtn');
 const menuToggle = document.getElementById('menuToggle');
 const sidebar = document.getElementById('sidebar');
 const closeSidebar = document.getElementById('closeSidebar');
@@ -8,10 +8,12 @@ const taskDate = document.getElementById('taskDate');
 const taskTime = document.getElementById('taskTime');
 const taskForm = document.getElementById('taskForm');
 const searchInput = document.getElementById('searchInput');
+const darkModeToggle = document.getElementById('darkModeToggle');
+const body = document.body;
 
-darkModeBtn.addEventListener('click', () => {
-  document.body.classList.toggle('dark');
-});
+// darkModeBtn.addEventListener('click', () => {
+//   document.body.classList.toggle('dark');
+// });
 
 menuToggle.addEventListener('click', () => {
     sidebar.classList.toggle('collapsed');
@@ -159,3 +161,30 @@ function showToast(message) {
   }, 2500); // 2.5 seconds
 }
 
+function applyDarkMode(isDark) {
+  if (isDark) {
+    body.classList.add('dark');
+    document.querySelectorAll('.task-card').forEach(card => card.classList.add('dark'));
+    document.querySelector('.sidebar')?.classList.add('dark');
+    document.querySelector('.task-container')?.classList.add('dark');
+  } else {
+    body.classList.remove('dark');
+    document.querySelectorAll('.task-card').forEach(card => card.classList.remove('dark'));
+    document.querySelector('.sidebar')?.classList.remove('dark');
+    document.querySelector('.task-container')?.classList.remove('dark');
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const darkMode = localStorage.getItem('darkMode') === 'true';
+  applyDarkMode(darkMode);
+});
+
+darkModeToggle.addEventListener('click', () => {
+  const isDark = body.classList.toggle('dark');
+  document.querySelectorAll('.task-card').forEach(card => card.classList.toggle('dark'));
+  document.querySelector('.sidebar')?.classList.toggle('dark');
+  document.querySelector('.task-container')?.classList.toggle('dark');
+
+  localStorage.setItem('darkMode', isDark);
+});

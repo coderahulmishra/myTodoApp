@@ -171,6 +171,7 @@
   
   .task-card {
     background-color: #ffffff;
+    color: black;
     border-left: 4px solid #4285f4;
     padding: 15px;
     border-radius: 6px;
